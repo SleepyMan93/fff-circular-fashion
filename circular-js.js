@@ -1,4 +1,4 @@
-window.addEventListener("DOMContentLoaded", () => {
+window.initFFFCircularFashionAnimations = function () {
   if (typeof gsap === "undefined") {
     console.warn("GSAP has not loaded.");
     return;
@@ -186,4 +186,4 @@ window.addEventListener("DOMContentLoaded", () => {
   animateSmoke("recyclers-smoke-03", 4.4, 1.4);
 
   console.log("FFF circular fashion SVG animations loaded.");
-});
+};
