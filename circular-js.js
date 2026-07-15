@@ -50,7 +50,7 @@ window.initFFFCircularFashionAnimations = function () {
   Group animation.
   Opens slightly from the right side.
   ------------------------------------------
-  */
+  
   const washerDoor = setSvgOrigin("extenders-washer-door", "right center");
 
   if (washerDoor) {
@@ -63,13 +63,13 @@ window.initFFFCircularFashionAnimations = function () {
       repeatDelay: 2.2
     });
   }
-
+*/
   /*
   ------------------------------------------
   EXTENDERS — WASHER BUTTONS
   These are groups, so we animate their child fills.
   ------------------------------------------
-  */
+
   function flashButtonGroup(id, activeFill, totalCycle, activeDuration) {
     const group = getEl(id);
     if (!group) return;
@@ -107,14 +107,14 @@ window.initFFFCircularFashionAnimations = function () {
 
   flashButtonGroup("extenders-washer-button-01", "#4CAF50", 5, 0.25);
   flashButtonGroup("extenders-washer-button-02", "#F2C94C", 3.5, 0.22);
-
+  */
   /*
   ------------------------------------------
   EXTENDERS — COTTON ROLL
   Group animation.
   Small roll movement up-left and back.
   ------------------------------------------
-  */
+  
   const cotton = setSvgOrigin("extenders-workbench-cotton-01", "center center");
 
   if (cotton) {
@@ -129,14 +129,14 @@ window.initFFFCircularFashionAnimations = function () {
       repeatDelay: 0.8
     });
   }
-
+*/
   /*
   ------------------------------------------
   RETAILERS — GARMENT SWAY
   Group animation.
   Only garment 01 and 02 exist in the current SVG.
   ------------------------------------------
-  */
+
   function swayGarment(id, rotation, duration, delay) {
     const el = setSvgOrigin(id, "top center");
     if (!el) return;
@@ -150,40 +150,46 @@ window.initFFFCircularFashionAnimations = function () {
       repeat: -1
     });
   }
-
+*/
   swayGarment("retailers-garment-01", 1.7, 2.8, 0.1);
   swayGarment("retailers-garment-02", -1.3, 3.6, 0.7);
 
-  /*
-  ------------------------------------------
-  RETAILERS — SHOP DOOR
-  Group animation.
-  Shrinks from left side, right side anchored.
-  ------------------------------------------
-  */
-  const shopDoor = setSvgOrigin("retailers-shop-door", "right center");
+ /*
+------------------------------------------
+RETAILERS — SHOP DOOR
+Subtle width squeeze from the left,
+right side anchored, to suggest opening.
+------------------------------------------
+*/
+const shopDoor = setSvgOrigin("retailers-shop-door", "right center");
 
-  if (shopDoor) {
-    const doorTl = gsap.timeline({ repeat: -1 });
+if (shopDoor) {
+  gsap.set(shopDoor, {
+    scaleX: 1,
+    transformBox: "fill-box",
+    transformOrigin: "right center"
+  });
 
-    doorTl
-      .to(shopDoor, {
-        scaleX: 0.18,
-        duration: 3,
-        ease: "sine.inOut"
-      })
-      .to({}, {
-        duration: 1.2
-      })
-      .to(shopDoor, {
-        scaleX: 1,
-        duration: 3,
-        ease: "sine.inOut"
-      })
-      .to({}, {
-        duration: 7
-      });
-  }
+  const doorTl = gsap.timeline({
+    repeat: -1,
+    repeatDelay: 5
+  });
+
+  doorTl
+    .to(shopDoor, {
+      scaleX: 0.76,
+      duration: 1.2,
+      ease: "sine.inOut"
+    })
+    .to({}, {
+      duration: 1
+    })
+    .to(shopDoor, {
+      scaleX: 1,
+      duration: 1.2,
+      ease: "sine.inOut"
+    });
+}
 
   /*
   ------------------------------------------
@@ -191,7 +197,7 @@ window.initFFFCircularFashionAnimations = function () {
   Group animation.
   Fade/grow but never above original opacity.
   ------------------------------------------
-  */
+ 
   function animateSmoke(id, duration, delay) {
     const el = setSvgOrigin(id, "center bottom");
     if (!el) return;
@@ -215,7 +221,7 @@ window.initFFFCircularFashionAnimations = function () {
       repeat: -1
     });
   }
-
+ */
   animateSmoke("recyclers-smoke-01", 2.8, 0);
   animateSmoke("recyclers-smoke-02", 3.7, 0.8);
   animateSmoke("recyclers-smoke-03", 4.4, 1.4);
