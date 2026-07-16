@@ -6,8 +6,10 @@
 
   // solo elements: fade+rise, no stagger
   var SOLO = ".heading-style-h1,.heading-style-h2,.heading-style-h2-2,.heading-style-h3,.heading-style-h4,.heading-style-h5,.heading-style-h6,.text-style-tagline";
+  // body copy + supporting text: same motion, smaller travel distance
+  var PARA = ".text-size-medium,.text-size-medium-2,.text-rich-text,.about_about_content,.about_feature_content-left,.about_feature_content-right,.services_feature_content-top,.case-studies_stats_content-left,.case-studies_stats_content-right,.home_customer-logos-list_content-left,.home_customer-logos-list_content-right,.blog-post_testimonial_content,.case-study_testimonial_content";
   // grouped elements: stagger by position among siblings sharing the same parent + selector
-  var GROUP = ".home_cta-2_card,.services_features-list_card-large,.services_features-list_card-small,.case-studies_case-study-list_item,.community_features-list_card-small,.community_features-list_card-large-vertical,.member-box,.about_team_item,.home_customer-logos-list_item,.resources_list_featured-item-link,.collection-item,.services_blog_item,.home_ecosystem-map_item,.footer2_link-column";
+  var GROUP = ".home_cta-2_card,.services_features-list_card-large,.services_features-list_card-small,.case-studies_case-study-list_item,.community_features-list_card-small,.community_features-list_card-large-vertical,.member-box,.about_team_item,.home_customer-logos-list_item,.resources_list_featured-item-link,.collection-item,.services_blog_item,.home_ecosystem-map_item,.footer2_link-column,.services_feature_item-list>*";
   // standalone content images (excludes hero/bg covers + slider/gallery items already covered by GROUP)
   var IMAGES = ".home_feature-2_image,.about_about_image1,.about_about_image2,.about_about_image3,.services_feature_image,.blog-post_header_image,.about_header_image";
   // elements to skip entirely — Webflow already animates these via native interactions
@@ -28,9 +30,14 @@
       }
     });
   }
-  prep(SOLO, false);
+  prep(SOLO, true);
   prep(GROUP, true);
   prep(IMAGES, false);
+  document.querySelectorAll(PARA).forEach(function(el){
+    if (isSkipped(el)) return;
+    el.classList.add("fff-reveal-sm");
+    el.style.transitionDelay = "90ms";
+  });
 
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
@@ -41,7 +48,7 @@
     });
   }, { root: null, rootMargin: "0px 0px -10% 0px", threshold: 0.15 });
 
-  document.querySelectorAll(".fff-reveal").forEach(function(el){ io.observe(el); });
+  document.querySelectorAll(".fff-reveal,.fff-reveal-sm").forEach(function(el){ io.observe(el); });
 
   // gentle parallax drift on cta3 background images
   var parallaxEls = Array.prototype.slice.call(document.querySelectorAll(".cta3_background-image"));
