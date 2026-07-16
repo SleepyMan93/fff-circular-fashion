@@ -1,0 +1,32 @@
+/* Future Fashion Fair — site-wide motion system. Paste into Webflow: Project Settings > Custom Code > Head Code (site-wide), wrapped in <style>...</style>. Sets the pre-animation hidden state so there's no flash before motion.js runs. */
+@media (prefers-reduced-motion: no-preference){
+.fff-reveal{opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.fff-reveal.is-inview{opacity:1;transform:translateY(0)}
+}
+/* buttons */
+.button{transition:transform .25s cubic-bezier(.4,0,.2,1),box-shadow .25s cubic-bezier(.4,0,.2,1),background-color .25s ease!important}
+.button:hover{transform:translateY(-2px);box-shadow:0 8px 20px -8px rgba(20,18,16,.35)}
+.button:active{transform:translateY(0);transition-duration:.1s}
+.button.is-link{transition:color .2s ease!important}
+.button.is-link .icon-embed-xxsmall,a.w-inline-block .icon-embed-xxsmall{transition:transform .25s cubic-bezier(.4,0,.2,1)}
+.button.is-link:hover .icon-embed-xxsmall,a.w-inline-block:hover .icon-embed-xxsmall{transform:translateX(4px)}
+/* nav + footer links get an animated underline */
+.navbar2_link,.footer2_link,.footer2_legal-link{position:relative}
+.navbar2_link::after,.footer2_link::after,.footer2_legal-link::after{content:"";position:absolute;left:0;bottom:-2px;width:100%;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.navbar2_link:hover::after,.footer2_link:hover::after,.footer2_legal-link:hover::after{transform:scaleX(1)}
+.footer2_social-link,.tag{transition:transform .25s cubic-bezier(.4,0,.2,1),opacity .25s ease}
+.footer2_social-link:hover{transform:translateY(-2px)}
+.tag:hover{transform:translateY(-1px)}
+/* card lift on hover — additive, doesn't fight Webflow's own card visuals */
+.home_cta-2_card,.services_features-list_card-large,.services_features-list_card-small,.case-studies_case-study-list_item,.community_features-list_card-small,.member-box,.about_team_item,.home_customer-logos-list_item,.resources_list_featured-item-link,.collection-item,.services_blog_item{transition:transform .35s cubic-bezier(.4,0,.2,1),box-shadow .35s cubic-bezier(.4,0,.2,1)}
+.home_cta-2_card:hover,.services_features-list_card-large:hover,.services_features-list_card-small:hover,.case-studies_case-study-list_item:hover,.community_features-list_card-small:hover,.member-box:hover,.about_team_item:hover,.home_customer-logos-list_item:hover,.resources_list_featured-item-link:hover,.collection-item:hover,.services_blog_item:hover{transform:translateY(-4px)}
+/* subtle image zoom on hover inside cards/galleries */
+.services_feature_image,.home_feature-2_image,.about_about_image1,.about_about_image2,.about_about_image3,.resources_list_image,.resources_list_featured-image,.services_blog_image,.case-studies_case-study-list_image{transition:transform .5s cubic-bezier(.4,0,.2,1)}
+a:hover>div>.resources_list_image,a:hover .resources_list_featured-image,a:hover .services_blog_image,a:hover .case-studies_case-study-list_image{transform:scale(1.04)}
+/* cta3 background gets a slow parallax drift, driven by motion.js setting --fff-parallax */
+.cta3_background-image{transition:transform .1s linear;transform:translateY(calc(var(--fff-parallax, 0) * 1px)) scale(1.06)}
+@media (prefers-reduced-motion: reduce){.cta3_background-image{transform:none!important}}
+/* page fade-in on load */
+body{opacity:0;animation:fff-body-in .5s ease forwards .05s}
+@keyframes fff-body-in{to{opacity:1}}
+@media (prefers-reduced-motion: reduce){body{opacity:1;animation:none}}
