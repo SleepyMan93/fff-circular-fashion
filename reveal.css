@@ -1,0 +1,54 @@
+/* Future Fashion Fair — animation utility library. Add ONE of these classes to any element to make it
+   animate in on scroll. Pair with reveal.js. Load both AFTER motion.css. */
+
+@media (prefers-reduced-motion: no-preference){
+  /* ---------- entrance triggers — put exactly one on an element ---------- */
+  [class*="fff-fade-"],.fff-scale-in,.fff-blur-in,.fff-pop-in,.fff-flip-in,.fff-rotate-in,.fff-mask-reveal{
+    transition-property: opacity, transform, filter, clip-path;
+    transition-duration: var(--fff-dur,.8s);
+    transition-timing-function: var(--fff-ease,cubic-bezier(.16,1,.3,1));
+    transition-delay: var(--fff-delay,0ms);
+  }
+
+  .fff-fade-up{opacity:0;transform:translateY(44px)}
+  .fff-fade-down{opacity:0;transform:translateY(-44px)}
+  .fff-fade-left{opacity:0;transform:translateX(-52px)}
+  .fff-fade-right{opacity:0;transform:translateX(52px)}
+  .fff-fade-in{opacity:0}
+
+  .fff-scale-in{opacity:0;transform:scale(.88)}
+  .fff-blur-in{opacity:0;filter:blur(14px);transform:scale(1.02)}
+
+  /* funky: overshoot pop */
+  .fff-pop-in{opacity:0;transform:scale(.4);transition-timing-function:cubic-bezier(.34,1.56,.64,1)}
+
+  /* funky: 3D flip up out of the floor */
+  .fff-flip-in{opacity:0;transform:perspective(800px) rotateX(-70deg);transform-origin:50% 100%}
+
+  /* funky: slight rotate + scale settle */
+  .fff-rotate-in{opacity:0;transform:rotate(-6deg) scale(.92)}
+
+  /* funky: horizontal wipe reveal (great for images/headlines) */
+  .fff-mask-reveal{clip-path:inset(0 100% 0 0);opacity:1;transition-property:clip-path}
+
+  [class*="fff-fade-"].is-inview,.fff-scale-in.is-inview,.fff-blur-in.is-inview,.fff-pop-in.is-inview,
+  .fff-rotate-in.is-inview{opacity:1;transform:none;filter:none}
+  .fff-flip-in.is-inview{opacity:1;transform:perspective(800px) rotateX(0deg)}
+  .fff-mask-reveal.is-inview{clip-path:inset(0 0 0 0)}
+}
+
+/* ---------- hover utilities — pure CSS, add alongside any of the above (or standalone) ---------- */
+.fff-hover-grow{transition:transform .35s cubic-bezier(.4,0,.2,1)}
+.fff-hover-grow:hover{transform:scale(1.045)}
+
+.fff-hover-lift{transition:transform .35s cubic-bezier(.4,0,.2,1),box-shadow .35s cubic-bezier(.4,0,.2,1)}
+.fff-hover-lift:hover{transform:translateY(-6px);box-shadow:0 16px 32px -12px rgba(20,18,16,.32)}
+
+.fff-hover-tilt{transition:transform .35s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d}
+.fff-hover-tilt:hover{transform:perspective(600px) rotateX(3deg) rotateY(-3deg) scale(1.015)}
+
+.fff-hover-glow{transition:box-shadow .4s ease,transform .4s cubic-bezier(.4,0,.2,1)}
+.fff-hover-glow:hover{box-shadow:0 0 0 1px rgba(119,41,221,.25),0 12px 40px -8px rgba(119,41,221,.45);transform:translateY(-2px)}
+
+/* ---------- stagger + waterfall containers — put on the PARENT, children auto-inherit delay ---------- */
+.fff-stagger,.fff-waterfall{ } /* markers read by reveal.js — no styling of their own */
