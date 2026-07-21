@@ -31,7 +31,7 @@ still need their own trigger class (fff-fade-up / fff-scale-in / fff-pop-in work
   "use strict";
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  var TRIGGERS = ".fff-fade-up,.fff-fade-down,.fff-fade-left,.fff-fade-right,.fff-fade-in,.fff-scale-in,.fff-blur-in,.fff-pop-in,.fff-flip-in,.fff-rotate-in,.fff-mask-reveal";
+  var TRIGGERS = ".fff-fade-up,.fff-fade-down,.fff-fade-left,.fff-fade-right,.fff-fade-in,.fff-scale-in,.fff-blur-in,.fff-pop-in,.fff-flip-in,.fff-rotate-in,.fff-mask-reveal,.fff-mask-reveal-v";
 
   function applyVars(el, delayMs){
     if (delayMs != null) el.style.setProperty("--fff-delay", delayMs + "ms");
