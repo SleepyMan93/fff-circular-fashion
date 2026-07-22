@@ -1,0 +1,42 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FFF SVG Test</title>
+  <style>
+    body {
+      margin: 0;
+      background: #fbf9f6;
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+    }
+
+    #fff-svg-target {
+      width: min(90vw, 900px);
+    }
+
+    #fff-svg-target svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      overflow: visible;
+    }
+  </style>
+</head>
+<body>
+  <div id="fff-svg-target"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="./circular-js.js"></script>
+
+  <script>
+    fetch("./circular-fashion-ecosystem-full-detail-v2.svg")
+      .then(res => res.text())
+      .then(svg => {
+        document.getElementById("fff-svg-target").innerHTML = svg;
+        initFFFCircularFashionAnimations();
+      });
+  </script>
+</body>
+</html>

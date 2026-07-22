@@ -18,9 +18,11 @@ window.initFFFCircularFashionAnimations = function () {
   if (connectors) {
     gsap.killTweensOf(connectors);
 
-    gsap.set(connectors, {
-      transformBox: "fill-box",
-      transformOrigin: "center center"
+    gsap.to(connectors, {
+      rotation: "+=360",
+      svgOrigin: "237.597 186.737",
+      duration: 5,
+      ease: "power1.inOut"
     });
 
     connectorTimeline = gsap.timeline({
