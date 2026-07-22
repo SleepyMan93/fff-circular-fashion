@@ -70,7 +70,7 @@ window.initFFFCircularFashionAnimations = function () {
 
   /*
   ==========================================
-  NODE HOVER COLOURS
+  NODE HOVER COLOURS + TAG EXPANSION
   ==========================================
   */
 
@@ -79,11 +79,14 @@ window.initFFFCircularFashionAnimations = function () {
     frontId,
     floorId,
     frontColour,
-    floorColour
+    floorColour,
+    tagBoxId,
+    tagExpandedWidth
   }) {
     const hover = document.getElementById(hoverId);
     const front = document.getElementById(frontId);
     const floor = document.getElementById(floorId);
+    const tagBox = document.getElementById(tagBoxId);
 
     if (!hover || !front || !floor) {
       console.warn("Missing node hover elements:", {
@@ -95,6 +98,10 @@ window.initFFFCircularFashionAnimations = function () {
       return;
     }
 
+    if (!tagBox) {
+      console.warn("Missing tag box:", tagBoxId);
+    }
+
     const originalFront =
       front.getAttribute("fill") ||
       window.getComputedStyle(front).fill;
@@ -102,6 +109,10 @@ window.initFFFCircularFashionAnimations = function () {
     const originalFloor =
       floor.getAttribute("fill") ||
       window.getComputedStyle(floor).fill;
+
+    const originalTagWidth = tagBox
+      ? Number(tagBox.getAttribute("width"))
+      : null;
 
     hover.style.cursor = "pointer";
 
@@ -121,6 +132,17 @@ window.initFFFCircularFashionAnimations = function () {
         ease: "power2.out",
         overwrite: true
       });
+
+      if (tagBox) {
+        gsap.to(tagBox, {
+          attr: {
+            width: tagExpandedWidth
+          },
+          duration: 0.45,
+          ease: "power3.out",
+          overwrite: true
+        });
+      }
     });
 
     hover.addEventListener("mouseleave", function () {
@@ -139,6 +161,17 @@ window.initFFFCircularFashionAnimations = function () {
         ease: "power2.out",
         overwrite: true
       });
+
+      if (tagBox && originalTagWidth !== null) {
+        gsap.to(tagBox, {
+          attr: {
+            width: originalTagWidth
+          },
+          duration: 0.35,
+          ease: "power2.inOut",
+          overwrite: true
+        });
+      }
     });
   }
 
@@ -154,7 +187,9 @@ window.initFFFCircularFashionAnimations = function () {
     frontId: "extenders-base-front-panel",
     floorId: "extenders-base-floor",
     frontColour: "#8B46E7",
-    floorColour: "#A86BEE"
+    floorColour: "#A86BEE",
+    tagBoxId: "fff-extenders-tag-box",
+    tagExpandedWidth: 56
   });
 
   /*
@@ -169,7 +204,9 @@ window.initFFFCircularFashionAnimations = function () {
     frontId: "recyclers-base-front-panel",
     floorId: "recyclers-base-floor",
     frontColour: "#23633A",
-    floorColour: "#378B52"
+    floorColour: "#378B52",
+    tagBoxId: "fff-recyclers-tag-box",
+    tagExpandedWidth: 56
   });
 
   /*
@@ -184,7 +221,9 @@ window.initFFFCircularFashionAnimations = function () {
     frontId: "remanufacturing-base-front-panel",
     floorId: "remanufacturing-base-floor",
     frontColour: "#48239A",
-    floorColour: "#6540BF"
+    floorColour: "#6540BF",
+    tagBoxId: "fff-remanufacturing-tag-box",
+    tagExpandedWidth: 56
   });
 
   /*
@@ -199,7 +238,9 @@ window.initFFFCircularFashionAnimations = function () {
     frontId: "retailers-base-front-panel",
     floorId: "retailers-base-floor",
     frontColour: "#F1996F",
-    floorColour: "#F5B08C"
+    floorColour: "#F5B08C",
+    tagBoxId: "fff-retailers-tag-box",
+    tagExpandedWidth: 56
   });
 
   console.log("FFF animations loaded.");
