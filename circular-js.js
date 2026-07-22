@@ -18,13 +18,6 @@ window.initFFFCircularFashionAnimations = function () {
   if (connectors) {
     gsap.killTweensOf(connectors);
 
-    gsap.to(connectors, {
-      rotation: "+=360",
-      svgOrigin: "237.597 186.737",
-      duration: 5,
-      ease: "power1.inOut"
-    });
-
     connectorTimeline = gsap.timeline({
       repeat: -1
     });
@@ -32,7 +25,8 @@ window.initFFFCircularFashionAnimations = function () {
     connectorTimeline
       .to(connectors, {
         rotation: "+=360",
-        duration: 5,
+        svgOrigin: "237.597 186.737",
+        duration: 15,
         ease: "power1.inOut"
       })
       .to({}, {
@@ -73,6 +67,7 @@ window.initFFFCircularFashionAnimations = function () {
   /*
   ==========================================
   NODE HOVER COLOURS + TAG EXPANSION
+  All tags expand to the right.
   ==========================================
   */
 
@@ -83,12 +78,14 @@ window.initFFFCircularFashionAnimations = function () {
     frontColour,
     floorColour,
     tagBoxId,
+    tagTextId,
     tagExpandedWidth
   }) {
     const hover = document.getElementById(hoverId);
     const front = document.getElementById(frontId);
     const floor = document.getElementById(floorId);
     const tagBox = document.getElementById(tagBoxId);
+    const tagText = document.getElementById(tagTextId);
 
     if (!hover || !front || !floor) {
       console.warn("Missing node hover elements:", {
@@ -96,12 +93,15 @@ window.initFFFCircularFashionAnimations = function () {
         frontId,
         floorId
       });
-
       return;
     }
 
     if (!tagBox) {
       console.warn("Missing tag box:", tagBoxId);
+    }
+
+    if (!tagText) {
+      console.warn("Missing tag text:", tagTextId);
     }
 
     const originalFront =
@@ -145,6 +145,16 @@ window.initFFFCircularFashionAnimations = function () {
           overwrite: true
         });
       }
+
+      if (tagText) {
+        gsap.to(tagText, {
+          opacity: 1,
+          duration: 0.25,
+          delay: 0.12,
+          ease: "power2.out",
+          overwrite: true
+        });
+      }
     });
 
     hover.addEventListener("mouseleave", function () {
@@ -174,13 +184,21 @@ window.initFFFCircularFashionAnimations = function () {
           overwrite: true
         });
       }
+
+      if (tagText) {
+        gsap.to(tagText, {
+          opacity: 0,
+          duration: 0.18,
+          ease: "power2.in",
+          overwrite: true
+        });
+      }
     });
   }
 
   /*
   ==========================================
   EXTENDERS
-  Main: #7729DD
   ==========================================
   */
 
@@ -191,13 +209,13 @@ window.initFFFCircularFashionAnimations = function () {
     frontColour: "#8B46E7",
     floorColour: "#A86BEE",
     tagBoxId: "fff-extenders-tag-box",
-    tagExpandedWidth: 56
+    tagTextId: "fff-extenders-tag-text",
+    tagExpandedWidth: 78
   });
 
   /*
   ==========================================
   RECYCLERS
-  Main: #153D24
   ==========================================
   */
 
@@ -208,13 +226,13 @@ window.initFFFCircularFashionAnimations = function () {
     frontColour: "#23633A",
     floorColour: "#378B52",
     tagBoxId: "fff-recyclers-tag-box",
-    tagExpandedWidth: 56
+    tagTextId: "fff-recyclers-tag-text",
+    tagExpandedWidth: 78
   });
 
   /*
   ==========================================
   REMANUFACTURING
-  Main: #2F126F
   ==========================================
   */
 
@@ -225,13 +243,13 @@ window.initFFFCircularFashionAnimations = function () {
     frontColour: "#48239A",
     floorColour: "#6540BF",
     tagBoxId: "fff-remanufacturing-tag-box",
-    tagExpandedWidth: 56
+    tagTextId: "fff-remanufacturing-tag-text",
+    tagExpandedWidth: 110
   });
 
   /*
   ==========================================
   RETAILERS
-  Main: #E88352
   ==========================================
   */
 
@@ -242,7 +260,8 @@ window.initFFFCircularFashionAnimations = function () {
     frontColour: "#F1996F",
     floorColour: "#F5B08C",
     tagBoxId: "fff-retailers-tag-box",
-    tagExpandedWidth: 56
+    tagTextId: "fff-retailers-tag-text",
+    tagExpandedWidth: 78
   });
 
   console.log("FFF animations loaded.");
